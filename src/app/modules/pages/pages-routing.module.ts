@@ -4,15 +4,13 @@ import { CharactersComponent } from './characters/characters.component';
 import { CharactersDetailsComponent } from './characters-details/characters-details.component';
 
 export const routes: Routes = [
-
-      { path: '', redirectTo: 'characters', pathMatch: 'full' },
-      { path: 'characters', component: CharactersComponent },
-      { path: 'characters-details/:id', component: CharactersDetailsComponent },
-
+  { path: '', redirectTo: 'characters', pathMatch: 'full' },
+  { path: 'characters', component: CharactersComponent },
+  { path: 'characters-details/:id', component: CharactersDetailsComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PagesRoutingModule {}
+export class PagesRoutingModule { }

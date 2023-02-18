@@ -5,14 +5,12 @@ import { finalize, Subject, takeUntil } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-characters-details',
   templateUrl: './characters-details.component.html',
   styleUrls: ['./characters-details.component.css']
 })
 export class CharactersDetailsComponent {
-
   public character!: Character;
   public userId!: string;
 
@@ -52,10 +50,8 @@ export class CharactersDetailsComponent {
           this.character = res.data.results[0];
         },
         error: (error) => {
-          console.log(error);
           this.hasError = true;
         }
       })
   }
-
 }

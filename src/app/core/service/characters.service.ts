@@ -11,12 +11,11 @@ import { environment } from 'src/environments/environment';
 export class CharactersService {
 
     private timeStamp = new Date().getTime();
-    private apiPrivateKey = '81926776e537ce510db30a443e4f3b328ef1a4aa';
     private hash: string = '';
 
     constructor(private http: HttpClient) {
-        if (this.timeStamp && this.apiPrivateKey && environment.apiPublicKey) {
-            this.hash = this.hashCode(this.timeStamp, this.apiPrivateKey, environment.apiPublicKey)
+        if (this.timeStamp && environment.apiPrivateKey && environment.apiPublicKey) {
+            this.hash = this.hashCode(this.timeStamp, environment.apiPrivateKey, environment.apiPublicKey)
         }
     }
 
@@ -24,9 +23,9 @@ export class CharactersService {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
-    public getCharacters(num: number): Observable<Characters> {
-        if (num) {
-            return this.http.get<Characters>(environment.apiUrl + '/characters?limit=10&orderBy=name&offset=' + num + this.hash)
+    public getCharacters(offset: number): Observable<Characters> {
+        if (offset) {
+            return this.http.get<Characters>(environment.apiUrl + '/characters?limit=10&orderBy=name&offset=' + offset + this.hash)
         }
         return this.http.get<Characters>(environment.apiUrl + '/characters?limit=10&orderBy=name' + this.hash)
     }

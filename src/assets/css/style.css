@@ -177,7 +177,6 @@ li.pagination-first.page-item.disabled {
   box-shadow: 0px 0px 2px 1px rgb(0 0 0 / 0.05) !important;
 }
 
-
 /* loading */
 .loader-line {
   width: 200px;
@@ -226,6 +225,7 @@ li.pagination-first.page-item.disabled {
   .pt-2_6 {
     padding-top: 1rem;
   }
+
   .w-21 {
     width: 100%;
   }

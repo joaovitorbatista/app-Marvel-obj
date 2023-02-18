@@ -4,27 +4,22 @@ import { finalize, Subject, takeUntil } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-characters',
   templateUrl: './characters.component.html',
   styleUrls: ['./characters.component.css']
 })
 export class CharactersComponent {
-
   public name: string = '';
-
   public characters: any;
   public limit: number = 0;
   public totalPages = 0;
 
-  public num: number = 0;
-
   isLoading: boolean = false;
   hasError: boolean = false;
-
   currentPage = 1;
   total = 50;
+  totalResult!: number;
 
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
@@ -33,16 +28,13 @@ export class CharactersComponent {
     private Router: Router,
     private router: ActivatedRoute,
     private _def: ChangeDetectorRef
-  ) {
-
-  }
+  ) { }
 
   ngOnInit() {
     this.getListCharacters();
   }
 
   getListCharacters(): void {
-
     this.isLoading = true;
     this.hasError = false;
 
@@ -56,7 +48,8 @@ export class CharactersComponent {
       .subscribe({
         next: (res) => {
           this.characters = res.data.results;
-          this.totalPages = res.data.total / 156.2;
+          this.totalResult = res.data.total / 10;
+          this.totalPages = res.data.total / this.totalResult;
           this.limit = res.data.limit
         },
         error: (error) => {
@@ -67,12 +60,21 @@ export class CharactersComponent {
   }
 
   search() {
+    this.isLoading = true;
+    this.hasError = false;
+
     this._charactersService.getCharactersByName(this.name)
-      .subscribe({
+      .pipe(
+        takeUntil(this._unsubscribeAll),
+        finalize(() => {
+          this.isLoading = false;
+        })
+      ).subscribe({
         next: (res) => {
           this.characters = res.data.results;
-          console.log(this.characters)
-          this.totalPages = res.data.total / 156.2
+          this.total = res.data.total;
+          this.totalResult = res.data.total / 10;
+          this.totalPages = res.data.total / this.totalResult;
           this.limit = res.data.limit
         },
         error: (error) => {
@@ -86,5 +88,4 @@ export class CharactersComponent {
     this.currentPage = event.page;
     this.getListCharacters();
   }
-
 }
