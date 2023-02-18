@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Characters } from '../models/characters.interface';
+import { Characters } from '../models/characters.types';
 import { Md5 } from 'ts-md5';
 import { environment } from 'src/environments/environment';
 

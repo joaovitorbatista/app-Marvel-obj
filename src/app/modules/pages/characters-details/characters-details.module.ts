@@ -6,10 +6,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { PagesRoutingModule } from '../pages-routing.module';
 
-
-
-
-
 @NgModule({
   declarations: [CharactersDetailsComponent],
   imports: [

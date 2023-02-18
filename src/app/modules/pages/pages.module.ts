@@ -12,9 +12,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 
-
-
-
 @NgModule({
   declarations: [
     PagesComponent,

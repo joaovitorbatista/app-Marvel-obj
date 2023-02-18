@@ -8,7 +8,6 @@ export const routes: Routes = [
       { path: '', redirectTo: 'characters', pathMatch: 'full' },
       { path: 'characters', component: CharactersComponent },
       { path: 'characters-details/:id', component: CharactersDetailsComponent },
-      { path: '**', redirectTo: 'error/404' },
 
 ];
 

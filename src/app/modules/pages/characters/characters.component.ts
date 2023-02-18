@@ -15,8 +15,6 @@ export class CharactersComponent {
   public name: string = '';
 
   public characters: any;
-  public count: any;
-  public offset: any;
   public limit: number = 0;
   public totalPages = 0;
 
@@ -48,7 +46,7 @@ export class CharactersComponent {
     this.isLoading = true;
     this.hasError = false;
 
-    this._charactersService.getCharacters((this.currentPage-1)*10)
+    this._charactersService.getCharacters((this.currentPage - 1) * 10)
       .pipe(
         takeUntil(this._unsubscribeAll),
         finalize(() => {
@@ -58,9 +56,7 @@ export class CharactersComponent {
       .subscribe({
         next: (res) => {
           this.characters = res.data.results;
-          this.totalPages = res.data.total/156.2;
-          this.count = res.data.count
-          this.offset = res.data.offset
+          this.totalPages = res.data.total / 156.2;
           this.limit = res.data.limit
         },
         error: (error) => {
@@ -72,18 +68,18 @@ export class CharactersComponent {
 
   search() {
     this._charactersService.getCharactersByName(this.name)
-    .subscribe({
-      next: (res) => {
-        this.characters = res.data.results;
-        console.log(this.characters)
-        this.totalPages = res.data.total/156.2
-        this.limit = res.data.limit
-      },
-      error: (error) => {
-        console.log(error);
-        this.isLoading = false;
-      }
-    });
+      .subscribe({
+        next: (res) => {
+          this.characters = res.data.results;
+          console.log(this.characters)
+          this.totalPages = res.data.total / 156.2
+          this.limit = res.data.limit
+        },
+        error: (error) => {
+          console.log(error);
+          this.isLoading = false;
+        }
+      });
   }
 
   pageChanged(event: any) {

@@ -1,15 +1,11 @@
-<div *ngIf="!character" class="mx-8 px-6 py-4 sm:px-8">
-  <h2 class="flex py-60 text-dark-smoke text-center items-center justify-center text-3xl font-bold">
-    Ops! Não conseguimos encontrar nenhum resultado.
-  </h2>
-</div>
+<div *ngIf="isLoading" class="loader-line"></div>
 
 <div *ngIf="character">
-  <div class="mx-8 px-6 py-4 sm:px-8 ">
+  <div class="px-10 py-4 sm:px-32 bg-dark-snow">
 
-    <div class="grid grid-cols-2 pt-6">
+    <div class="grid grid-cols-2 pt-2_6">
       <div>
-        <h2 class="text-dark-smoke text-3xl font-bold">Detalhe do personagem: {{ character?.name }}</h2>
+        <h2 class="text-dark-smoke text-3xl font-bold">Detalhe do personagem: {{ character.name }}</h2>
         <p class="text-dark-smoke text-base pt-2">Saiba tudo sobre o mundo marvel</p>
       </div>
       <div class="flex justify-end">
@@ -18,41 +14,69 @@
     </div>
 
     <div
-      class="grid grid-cols-1 md:grid-cols-12 border-solid border-gray-300 hover:border-gray-400 border shadow-sm hover:shadow rounded card bg-white text-dark-smoke text-sm mt-8 p-8">
+      class="grid grid-cols-1 md:grid-cols-12 rounded-2xl border-solid border-gray-300 hover:border-gray-400 border shadow-sm hover:shadow rounded card bg-white text-dark-smoke text-sm mt-8 p-8">
       <div class="col-span-4 font-bold">
 
         <figure>
-          <img src="{{character.thumbnail.path}}.{{character.thumbnail.extension}}" alt="">
+          <img class="rounded-2xl" src="{{character.thumbnail.path}}.{{character.thumbnail.extension}}" alt="">
         </figure>
 
       </div>
       <div class="col-span-8 p-6">
-        <h1 class="text-dark-smoke text-3xl font-bold">{{ character?.name }}</h1>
+        <h1 class="text-dark-smoke text-3xl font-bold">{{ character.name }}</h1>
         <div class="flex-auto">
           <div class="w-full max-w-screen-xl mx-auto">
             <mat-tab-group preserveContent>
-              <mat-tab label="Comics">
+              <mat-tab label="Séries">
                 <ng-template matTabContent>
-                    <h2 class="text-dark-smoke text-xl font-bold pt-4">Comics</h2>
-                    <ng-template ngFor let-item [ngForOf]="character.comics.items">
-                      <p class="text-base">{{ item.name }}</p>
-                    </ng-template>
-                </ng-template>
-              </mat-tab>
-              <mat-tab label="Series">
-                <ng-template matTabContent>
-                    <h2 class="text-dark-smoke text-xl font-bold pt-4">Series</h2>
+                  <h2 class="text-dark-smoke text-xl font-bold pt-4">Séries</h2>
+                  <span *ngIf="character.series.items[0]?.name; else noDataSeries">
                     <ng-template ngFor let-item [ngForOf]="character.series.items">
                       <p class="text-base">{{ item.name }}</p>
                     </ng-template>
+                  </span>
+                  <ng-template #noDataSeries>
+                    <p class="italic">Sem series</p>
+                  </ng-template>
+                </ng-template>
+              </mat-tab>
+              <mat-tab label="Eventos">
+                <ng-template matTabContent>
+                  <h2 class="text-dark-smoke text-xl font-bold pt-4">Eventos</h2>
+                  <span *ngIf="character.events.items[0]?.name; else noDataSeries">
+                    <ng-template ngFor let-item [ngForOf]="character.events.items">
+                      <p class="text-base">{{ item.name }}</p>
+                    </ng-template>
+                  </span>
+                  <ng-template #noDataSeries>
+                    <p class="italic">Sem Eventos</p>
+                  </ng-template>
                 </ng-template>
               </mat-tab>
               <mat-tab label="Stories">
                 <ng-template matTabContent>
-                    <h2 class="text-dark-smoke text-xl font-bold pt-4">Stories</h2>
+                  <h2 class="text-dark-smoke text-xl font-bold pt-4">Stories</h2>
+                  <span *ngIf="character.stories.items[0]?.name; else noDataSeries">
                     <ng-template ngFor let-item [ngForOf]="character.stories.items">
                       <p class="text-base">{{ item.name }}</p>
                     </ng-template>
+                  </span>
+                  <ng-template #noDataSeries>
+                    <p class="italic">Sem Stories</p>
+                  </ng-template>
+                </ng-template>
+              </mat-tab>
+              <mat-tab label="Comics">
+                <ng-template matTabContent>
+                  <h2 class="text-dark-smoke text-xl font-bold pt-4">Comics</h2>
+                  <span *ngIf="character.comics.items[0]?.name; else noDataSeries">
+                    <ng-template ngFor let-item [ngForOf]="character.comics.items">
+                      <p class="text-base">{{ item.name }}</p>
+                    </ng-template>
+                  </span>
+                  <ng-template #noDataSeries>
+                    <p class="italic">Sem Comics</p>
+                  </ng-template>
                 </ng-template>
               </mat-tab>
             </mat-tab-group>
@@ -61,4 +85,12 @@
       </div>
     </div>
   </div>
+</div>
+
+
+
+<div *ngIf="hasError" class="mx-8 px-6 py-4 sm:px-8">
+  <h2 class="flex py-60 text-dark-smoke text-center items-center justify-center text-3xl font-bold">
+    Ops! Não conseguimos encontrar nenhum resultado.
+  </h2>
 </div>
