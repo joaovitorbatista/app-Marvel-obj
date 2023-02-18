@@ -1,0 +1,64 @@
+<div *ngIf="!character" class="mx-8 px-6 py-4 sm:px-8">
+  <h2 class="flex py-60 text-dark-smoke text-center items-center justify-center text-3xl font-bold">
+    Ops! Não conseguimos encontrar nenhum resultado.
+  </h2>
+</div>
+
+<div *ngIf="character">
+  <div class="mx-8 px-6 py-4 sm:px-8 ">
+
+    <div class="grid grid-cols-2 pt-6">
+      <div>
+        <h2 class="text-dark-smoke text-3xl font-bold">Detalhe do personagem: {{ character?.name }}</h2>
+        <p class="text-dark-smoke text-base pt-2">Saiba tudo sobre o mundo marvel</p>
+      </div>
+      <div class="flex justify-end">
+        <a class="btn-back w-28 h-12 flex justify-center items-center" [routerLink]="['/pages/characters']">Voltar</a>
+      </div>
+    </div>
+
+    <div
+      class="grid grid-cols-1 md:grid-cols-12 border-solid border-gray-300 hover:border-gray-400 border shadow-sm hover:shadow rounded card bg-white text-dark-smoke text-sm mt-8 p-8">
+      <div class="col-span-4 font-bold">
+
+        <figure>
+          <img src="{{character.thumbnail.path}}.{{character.thumbnail.extension}}" alt="">
+        </figure>
+
+      </div>
+      <div class="col-span-8 p-6">
+        <h1 class="text-dark-smoke text-3xl font-bold">{{ character?.name }}</h1>
+        <div class="flex-auto">
+          <div class="w-full max-w-screen-xl mx-auto">
+            <mat-tab-group preserveContent>
+              <mat-tab label="Comics">
+                <ng-template matTabContent>
+                    <h2 class="text-dark-smoke text-xl font-bold pt-4">Comics</h2>
+                    <ng-template ngFor let-item [ngForOf]="character.comics.items">
+                      <p class="text-base">{{ item.name }}</p>
+                    </ng-template>
+                </ng-template>
+              </mat-tab>
+              <mat-tab label="Series">
+                <ng-template matTabContent>
+                    <h2 class="text-dark-smoke text-xl font-bold pt-4">Series</h2>
+                    <ng-template ngFor let-item [ngForOf]="character.series.items">
+                      <p class="text-base">{{ item.name }}</p>
+                    </ng-template>
+                </ng-template>
+              </mat-tab>
+              <mat-tab label="Stories">
+                <ng-template matTabContent>
+                    <h2 class="text-dark-smoke text-xl font-bold pt-4">Stories</h2>
+                    <ng-template ngFor let-item [ngForOf]="character.stories.items">
+                      <p class="text-base">{{ item.name }}</p>
+                    </ng-template>
+                </ng-template>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

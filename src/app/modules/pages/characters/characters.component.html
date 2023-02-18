@@ -1,0 +1,50 @@
+<div class="px-10 py-4 sm:px-20 bg-dark-snow">
+
+  <div class="grid grid-cols-1 pt-6">
+    <h2 class="text-dark-smoke text-4xl font-bold tracking-wide">Busca de personagens</h2>
+    <p class="text-dark-smoke text-xl font-bold pt-2 tracking-wide">Nome do personagem</p>
+    <form class="example-form pt-4">
+      <mat-form-field>
+        <input matInput [(ngModel)]="name" [ngModelOptions]="{standalone: true}" placeholder="Search">
+        <mat-icon (click)="search()" matSuffix>search</mat-icon>
+      </mat-form-field>
+    </form>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 pt-2 text-sm text-smoke pb-2">
+    <div class="pl-4">Personagem</div>
+    <div class="hidden md:grid">Series</div>
+    <div class="hidden md:grid">Eventos</div>
+  </div>
+  <div *ngFor="let character of characters">
+    <a [routerLink]="['/pages/characters-details/', character.id]"
+      class="grid grid-cols-1 md:grid-cols-3 border-solid border-gray-300 hover:border-gray-400 border shadow-sm hover:shadow rounded card bg-white py-4 mb-4 text-dark-smoke text-sm items-center">
+      <div class="pl-4 font-bold flex items-center">
+        <img class="w-20 float-left" src="{{character.thumbnail.path}}.{{character.thumbnail.extension}}" alt="">
+        <span class="pl-4">
+          {{ character.name }}
+        </span>
+      </div>
+      <div class="hidden md:grid">
+        <span *ngIf="character.series.items[0]?.name; else noDataSeries">
+          {{ character.series.items[0]?.name }}
+        </span>
+        <ng-template #noDataSeries>
+          <p class="italic">Sem series</p>
+        </ng-template>
+      </div>
+      <div class="hidden md:grid">
+        <span *ngIf="character.events.items[0]?.name; else noDataEvents">
+          {{ character.events.items[0]?.name }}
+        </span>
+        <ng-template #noDataEvents>
+          <p class="italic">Sem eventos</p>
+        </ng-template>
+      </div>
+
+    </a>
+  </div>
+
+</div>
+
+<pagination [totalItems]="total" (pageChanged)="pageChanged($event)" [itemsPerPage] = "totalPages"  [maxSize]="limit" ></pagination>
