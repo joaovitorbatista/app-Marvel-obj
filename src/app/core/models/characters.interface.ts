@@ -31,13 +31,11 @@ export type Character = {
   }
   events: {
     items: Array<{
-      resourceURI: string
       name: string
     }>
   }
   series: {
     items: Array<{
-      resourceURI: string
       name: string
     }>
   }

@@ -36,18 +36,6 @@ export class CharactersComponent {
     private router: ActivatedRoute,
     private _def: ChangeDetectorRef
   ) {
-    router.params.subscribe((params) => {
-      if (params["num"]) {
-        this.num = Number(params["num"])
-        this._charactersService.getCharacters(this.num*156.2)
-        .subscribe({
-          next: (res) => {
-            this.characters = res.data.results;
-            this.totalPages = res.data.total/156.2;
-          }
-        });
-      }
-    });
 
   }
 
@@ -60,7 +48,7 @@ export class CharactersComponent {
     this.isLoading = true;
     this.hasError = false;
 
-    this._charactersService.getCharacters(this.num*156.2)
+    this._charactersService.getCharacters((this.currentPage-1)*10)
       .pipe(
         takeUntil(this._unsubscribeAll),
         finalize(() => {
@@ -74,13 +62,6 @@ export class CharactersComponent {
           this.count = res.data.count
           this.offset = res.data.offset
           this.limit = res.data.limit
-
-          console.log("total", this.total);
-          console.log("characters", this.characters.length*156.2);
-          console.log("totalPages", this.totalPages);
-          console.log("count", this.count);
-          console.log("num", this.num);
-          console.log("limit", this.limit);
         },
         error: (error) => {
           console.log(error);
@@ -107,6 +88,7 @@ export class CharactersComponent {
 
   pageChanged(event: any) {
     this.currentPage = event.page;
+    this.getListCharacters();
   }
 
 }

@@ -24,11 +24,6 @@ export class CharactersService {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
-    // getCharacters(num:number):Observable<Characters> {
-    //   const url = `${apiMarvel}/v1/public/characters?&limit=6`;
-    //   return this.http.get<Characters>(environment.apiUrl+'/characters?limit=20&orderBy=name'+this.hash);
-    // }
-
     public getCharacters(num: number): Observable<Characters> {
         if (num) {
             return this.http.get<Characters>(environment.apiUrl + '/characters?limit=10&orderBy=name&offset=' + num + this.hash)
