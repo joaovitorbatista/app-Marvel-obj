@@ -1,27 +1,28 @@
-# MarvelApp
+## 📁 MarvelApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.6.
+![alt text](https://github.com/joaovitorbatista/app-Marvel-obj/blob/master/src/assets/images/marvelDesktop.jpg)
 
-## Development server
+## 🔨 Funcionalidades do projeto
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+O app foi desenvolvido utilizando HTML, CSS, TypeScript e tem o layout responsivo.
+A aplicação possui duas telas:
+- Listagem dos personagens do universo Marvel
+- Detalhes de cada personagem.
 
-## Code scaffolding
+## 🛠️ Abrir e rodar o projeto
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Execute 'npm install' e 'ng s' e acesse `http://localhost:4200/`.
 
-## Build
+## 🔨 Tecnologias utilizadas
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+-`Angular 15.1.6`
+-`Tailwind`
+-`Material.io`
+- Esse projeto foi gerado com [Angular CLI](https://github.com/angular/angular-cli) version 15.1.6.
 
-## Running unit tests
+## Importante
+Para que você consiga rodar o projeto, é importante que realize uma conta na Api da Marvel
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## 📚 Ajuda adicional
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Para obter mais ajuda sobre o Angular CLI, use 'ng help' ou confira a página [Visão geral e referência de comandos do Angular CLI] (https://angular.io/cli).
