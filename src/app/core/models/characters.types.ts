@@ -1,13 +1,12 @@
 export type Characters = {
   code: string
   data: {
-    offset: string
+    offset: number
     limit: number
     total: number
-    count: string
+    count: number
     results: Character[]
   }
-  etag: string
 }
 
 export type Character = {

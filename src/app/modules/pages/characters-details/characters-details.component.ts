@@ -1,9 +1,8 @@
-import { Character } from '../../../core/models/characters.types';
-import { CharactersService } from '../../../core/service/characters.service';
 import { Component } from '@angular/core';
+import { CharactersService } from '../../../core/service/characters.service';
+import { Character } from '../../../core/models/characters.types';
 import { finalize, Subject, takeUntil } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-characters-details',
@@ -21,7 +20,6 @@ export class CharactersDetailsComponent {
 
   constructor(
     private _charactersService: CharactersService,
-    private Router: Router,
     private router: ActivatedRoute
   ) {
     router.params.subscribe((params) => {

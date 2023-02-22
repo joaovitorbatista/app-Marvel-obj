@@ -1,8 +1,6 @@
 import { CharactersService } from '../../../core/service/characters.service';
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { finalize, Subject, takeUntil } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-characters',
@@ -25,9 +23,6 @@ export class CharactersComponent {
 
   constructor(
     private _charactersService: CharactersService,
-    private Router: Router,
-    private router: ActivatedRoute,
-    private _def: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
